@@ -1,0 +1,343 @@
+/* index.wxss - 游戏主页面样式 */
+
+/* 容器基础样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light-theme {
+  --bg-color: #f4f4f4;
+  --container-bg: white;
+  --text-color: #333;
+  --heading-color: #4a4a4a;
+  --counter-color: #555;
+  --button-bg: #4caf50;
+  --button-hover-bg: #388e3c;
+  --button-text: white;
+  --cell-bg: #e0e0e0;
+  --cell-shadow: rgba(0, 0, 0, 0.1);
+  --highlight-color: #ffeb3b;
+}
+
+.dark-theme {
+  --bg-color: #121212;
+  --container-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --heading-color: #f0f0f0;
+  --counter-color: #b0b0b0;
+  --button-bg: #2e7d32;
+  --button-hover-bg: #1b5e20;
+  --button-text: #e0e0e0;
+  --cell-bg: #2a2a2a;
+  --cell-shadow: rgba(0, 0, 0, 0.3);
+  --highlight-color: #ffd600;
+}
+
+/* 顶部容器 */
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+/* 标题样式 */
+.title {
+  font-size: 60rpx;
+  font-weight: bold;
+  margin: 20rpx 0 30rpx;
+  color: var(--heading-color);
+}
+
+/* 游戏信息区域 */
+.game-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  font-size: 30rpx;
+}
+
+/* 记录显示 */
+.records-display {
+  font-size: 28rpx;
+  color: var(--counter-color);
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  opacity: 0.8;
+}
+
+/* 积分显示 */
+.score-display {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* 计数器容器 */
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.counter-label {
+  font-weight: bold;
+  color: var(--counter-color);
+}
+
+/* 进度条 */
+.progress-bar-container {
+  width: 240rpx;
+  height: 20rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 10rpx;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* 主题切换开关 */
+.theme-switch {
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 100rpx;
+  height: 48rpx;
+  border-radius: 48rpx;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}
+
+.switch.checked {
+  background-color: var(--button-bg);
+}
+
+.slider {
+  position: absolute;
+  height: 32rpx;
+  width: 32rpx;
+  left: 8rpx;
+  bottom: 8rpx;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s;
+}
+
+.slider.checked {
+  transform: translateX(52rpx);
+}
+
+.theme-label {
+  margin-left: 20rpx;
+  font-size: 28rpx;
+  color: var(--counter-color);
+  opacity: 0.8;
+}
+
+/* 游戏棋盘 */
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 20rpx;
+  width: 650rpx;
+  height: 650rpx;
+  margin: 0 auto 40rpx;
+  position: relative;
+}
+
+/* 格子样式 */
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cell-bg);
+  border-radius: 16rpx;
+  font-size: 48rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 10rpx var(--cell-shadow);
+  transition: transform 0.05s ease-out, background-color 0.15s ease-out;
+}
+
+.cell.empty {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.cell.highlight {
+  animation: pulse 0.15s ease-in-out;
+}
+
+.cell.new-connected {
+  animation: newConnected 0.4s ease-in-out;
+  box-shadow: 0 0 8rpx rgba(255, 235, 59, 0.4);
+  z-index: 5;
+}
+
+/* 重新开始按钮 */
+.restart-btn {
+  padding: 20rpx 40rpx;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 10rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.restart-btn:active {
+  background-color: var(--button-hover-bg);
+}
+
+/* 积分弹出动画 */
+.score-popup {
+  position: absolute;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #4caf50;
+  z-index: 200;
+  opacity: 1;
+  transition: all 1s ease-out;
+  pointer-events: none;
+}
+
+.score-popup.fade-up {
+  transform: translateY(-100rpx);
+  opacity: 0;
+}
+
+/* 模态框样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 600rpx;
+  background-color: var(--container-bg);
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  font-size: 40rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40rpx;
+  color: var(--heading-color);
+}
+
+.modal-message {
+  text-align: center;
+  margin: 40rpx 0;
+  font-size: 32rpx;
+  color: var(--text-color);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+}
+
+/* 游戏结果显示 */
+.game-results {
+  margin: 40rpx 0;
+  text-align: center;
+  font-size: 34rpx;
+  line-height: 1.8;
+  color: var(--text-color);
+}
+
+.highlight-text {
+  font-weight: bold;
+  color: var(--button-bg);
+}
+
+.congrats {
+  text-align: center;
+  color: #ff9800;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin: 40rpx 0;
+  animation: pulse 1s infinite alternate;
+}
+
+.record-text {
+  font-weight: bold;
+  color: #ff9800;
+}
+
+/* 模态框按钮 */
+.modal-btn {
+  padding: 20rpx 40rpx;
+  border-radius: 10rpx;
+  font-size: 32rpx;
+  margin: 0 20rpx;
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.primary-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+.dark-theme .modal-btn:not(.primary-btn) {
+  background-color: #424242;
+  color: #e0e0e0;
+}
+
+/* 动画关键帧 */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes newConnected {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 4rpx rgba(255, 235, 59, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 12rpx rgba(255, 235, 59, 0.5);
+  }
+} 

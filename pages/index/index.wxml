@@ -1,0 +1,95 @@
+<!-- index.wxml - 游戏主页面结构 -->
+<view class="container {{theme === 'dark' ? 'dark-theme' : 'light-theme'}}">
+  <!-- 顶部区域：标题和历史记录 -->
+  <view class="top-container">
+    <view class="records-display">
+      <view>最高数字: {{recordHighestNumber}}</view>
+      <view>最高积分: {{recordHighestScore}}</view>
+    </view>
+    <view class="theme-switch">
+      <view class="switch" bindtap="toggleTheme">
+        <view class="slider {{theme === 'dark' ? 'checked' : ''}}"></view>
+      </view>
+      <text class="theme-label">暗黑模式</text>
+    </view>
+  </view>
+  
+  <view class="title">点我+1</view>
+  
+  <!-- 游戏信息区域：计数器和积分 -->
+  <view class="game-info">
+    <view class="counter-container">
+      <view class="counter-label">剩余点击次数: <text>{{clicksLeft}}</text></view>
+      <view class="progress-bar-container">
+        <view class="progress-bar" style="width: {{progressPercent}}%; background-color: {{progressColor}};"></view>
+      </view>
+    </view>
+    <view class="score-display">积分: {{score}}</view>
+  </view>
+  
+  <!-- 游戏棋盘 -->
+  <view class="game-board">
+    <block wx:for="{{board}}" wx:for-item="row" wx:for-index="rowIndex" wx:key="rowIndex">
+      <block wx:for="{{row}}" wx:for-item="cell" wx:for-index="colIndex" wx:key="colIndex">
+        <view 
+          class="cell {{cell === null ? 'empty' : ''}} {{cellHighlight[rowIndex]&&cellHighlight[rowIndex][colIndex] ? 'highlight' : ''}} {{newConnected[rowIndex+'-'+colIndex] ? 'new-connected' : ''}}"
+          data-row="{{rowIndex}}" 
+          data-col="{{colIndex}}" 
+          data-value="{{cell}}"
+          style="{{cell !== null ? getCellStyle(cell) : ''}}"
+          catchtap="handleCellTap"
+        >
+          {{cell !== null ? cell : ''}}
+        </view>
+      </block>
+    </block>
+    
+    <!-- 得分弹出动画 -->
+    <view wx:if="{{scorePopup.visible}}" class="score-popup {{scorePopup.fadeOut ? 'fade-up' : ''}}" 
+      style="left: {{50 + scorePopup.col * 62}}px; top: {{50 + scorePopup.row * 62}}px;">
+      +{{scorePopup.score}}
+    </view>
+  </view>
+  
+  <!-- 重新开始按钮 -->
+  <button class="restart-btn" bindtap="restartGame">重新开始</button>
+  
+  <!-- 游戏结束模态框 -->
+  <view class="modal-mask" wx:if="{{modalVisible}}" catchtouchmove="preventTouchMove">
+    <view class="modal-content">
+      <view class="modal-header">{{modalTitle}}</view>
+      
+      <!-- 游戏结束统计 -->
+      <block wx:if="{{modalType === 'gameEnd'}}">
+        <view class="game-results">
+          <view>本局得分: <text class="highlight-text">{{gameEndStats.score}}</text></view>
+          <view>最大数字: <text class="highlight-text">{{gameEndStats.maxNumber}}</text></view>
+        </view>
+        
+        <!-- 如果破纪录，显示恭喜信息 -->
+        <block wx:if="{{gameEndStats.isNewNumberRecord || gameEndStats.isNewScoreRecord}}">
+          <view class="congrats">恭喜你打破记录！</view>
+          <view wx:if="{{gameEndStats.isNewNumberRecord}}">
+            新的最高数字: <text class="record-text">{{gameEndStats.maxNumber}}</text>
+          </view>
+          <view wx:if="{{gameEndStats.isNewScoreRecord}}">
+            新的最高分数: <text class="record-text">{{gameEndStats.score}}</text>
+          </view>
+        </block>
+      </block>
+      
+      <!-- 确认对话框内容 -->
+      <view wx:if="{{modalType === 'confirm'}}" class="modal-message">
+        {{modalMessage}}
+      </view>
+      
+      <!-- 模态框按钮 -->
+      <view class="modal-footer">
+        <view wx:if="{{modalType === 'confirm'}}" class="modal-btn" bindtap="closeModal">取消</view>
+        <view class="modal-btn primary-btn" bindtap="confirmModal">
+          {{modalType === 'gameEnd' ? '重新开始' : '确定'}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

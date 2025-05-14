@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "点我+1",
+  "enablePullDownRefresh": false,
+  "disableScroll": true,
+  "pageOrientation": "auto"
+} 

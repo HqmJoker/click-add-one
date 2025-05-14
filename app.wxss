@@ -1,0 +1,43 @@
+/**app.wxss - 全局样式**/
+page {
+  /* 全局基础样式 */
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  box-sizing: border-box;
+  height: 100%;
+  /* 亮色模式下的变量 */
+  --bg-color: #f4f4f4;
+  --container-bg: white;
+  --text-color: #333;
+  --heading-color: #4a4a4a;
+  --counter-color: #555;
+  --button-bg: #4caf50;
+  --button-hover-bg: #388e3c;
+  --button-text: white;
+  --cell-bg: #e0e0e0;
+  --cell-shadow: rgba(0, 0, 0, 0.1);
+  --highlight-color: #ffeb3b;
+}
+
+/* 暗色模式样式适配 */
+@media (prefers-color-scheme: dark) {
+  page {
+    --bg-color: #121212;
+    --container-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --heading-color: #f0f0f0;
+    --counter-color: #b0b0b0;
+    --button-bg: #2e7d32;
+    --button-hover-bg: #1b5e20;
+    --button-text: #e0e0e0;
+    --cell-bg: #2a2a2a;
+    --cell-shadow: rgba(0, 0, 0, 0.3);
+    --highlight-color: #ffd600;
+  }
+}
+
+/* 清除默认样式 */
+view, text, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} 
