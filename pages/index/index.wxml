@@ -16,15 +16,9 @@
   
   <view class="title">点我+1</view>
   
-  <!-- 游戏信息区域：计数器和积分 -->
-  <view class="game-info">
-    <view class="counter-container">
-      <view class="counter-label">剩余点击次数: <text>{{clicksLeft}}</text></view>
-      <view class="progress-bar-container">
-        <view class="progress-bar" style="width: {{progressPercent}}%; background-color: {{progressColor}};"></view>
-      </view>
-    </view>
-    <view class="score-display">积分: {{score}}</view>
+  <view class="game-info-row">
+    <view class="score-display">🏆 {{score}}</view>
+    <view class="counter-label">💡 剩余: {{clicksLeft}}</view>
   </view>
   
   <!-- 游戏棋盘 -->

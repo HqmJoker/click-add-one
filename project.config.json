@@ -40,7 +40,7 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "2.19.4",
+  "libVersion": "3.8.7",
   "appid": "wx6820a862666adf95",
   "projectname": "点我加一",
   "condition": {},
