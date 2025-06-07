@@ -1,6 +1,8 @@
 // index.js - 游戏主页面逻辑
 const app = getApp();
 
+const adController = require('./../../utils/ad-controller.js');
+
 Page({
   // 页面的初始数据
   data: {
@@ -658,13 +660,13 @@ Page({
   
   // 确认模态框
   confirmModal: function() {
-    if (this.data.modalType === 'confirm') {
-      // 清除游戏状态
-      wx.removeStorageSync('tapmeGameState');
-      // 重新初始化游戏
-      this.initGame();
-    } else if (this.data.modalType === 'gameEnd') {
-      // 游戏结束后重新开始
+    if (this.data.modalType === 'confirm' || this.data.modalType === 'gameEnd') {
+      // adController.showRewardedAd(() => {
+      //   // 激励广告完整观看后，重置游戏
+      //   wx.removeStorageSync('tapmeGameState');
+      //   this.initGame();
+      // });
+      
       wx.removeStorageSync('tapmeGameState');
       this.initGame();
     }

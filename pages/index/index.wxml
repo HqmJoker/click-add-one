@@ -1,20 +1,21 @@
 <!-- index.wxml - 游戏主页面结构 -->
 <view class="container {{theme === 'dark' ? 'dark-theme' : 'light-theme'}}">
+  <view class="title">点我+1</view>
+  
   <!-- 顶部区域：标题和历史记录 -->
   <view class="top-container">
     <view class="records-display">
       <view>最高数字: {{recordHighestNumber}}</view>
       <view>最高积分: {{recordHighestScore}}</view>
     </view>
-    <view class="theme-switch">
+    <!-- <view class="theme-switch">
       <view class="switch" bindtap="toggleTheme">
         <view class="slider {{theme === 'dark' ? 'checked' : ''}}"></view>
       </view>
       <text class="theme-label">暗黑模式</text>
-    </view>
+    </view> -->
   </view>
   
-  <view class="title">点我+1</view>
   
   <view class="game-info-row">
     <view class="score-display">🏆 {{score}}</view>
